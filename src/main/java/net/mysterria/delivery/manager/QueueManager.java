@@ -2,7 +2,10 @@ package net.mysterria.delivery.manager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.mysterria.delivery.MysterriaDelivery;
@@ -36,6 +39,26 @@ public class QueueManager {
     private final Map<String, QueuedDelivery> queue = new ConcurrentHashMap<>();
     private final Gson gson = new GsonBuilder()
         .setPrettyPrinting()
+        .registerTypeAdapter(LocalDateTime.class, new TypeAdapter<LocalDateTime>() {
+            @Override
+            public void write(JsonWriter out, LocalDateTime value) throws IOException {
+                if (value == null) {
+                    out.nullValue();
+                } else {
+                    out.value(value.toString());
+                }
+            }
+
+            @Override
+            public LocalDateTime read(JsonReader in) throws IOException {
+                if (in.peek() == com.google.gson.stream.JsonToken.NULL) {
+                    in.nextNull();
+                    return null;
+                } else {
+                    return LocalDateTime.parse(in.nextString());
+                }
+            }
+        })
         .create();
     private final File queueFile;
     
