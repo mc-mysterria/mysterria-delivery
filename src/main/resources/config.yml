@@ -1,0 +1,15 @@
+# MysterriaDelivery Configuration
+
+# Announcement settings
+announcements:
+  # Enable purchase announcements
+  enabled: true
+  # Announce globally (true) or only to purchaser (false)
+  global: true
+
+# Delivery settings
+delivery:
+  # Maximum retry attempts for failed deliveries
+  maxRetries: 3
+  # Delay in ticks before processing queued deliveries on join (20 ticks = 1 second)
+  delayTicks: 60

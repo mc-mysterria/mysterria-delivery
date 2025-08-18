@@ -1,0 +1,12 @@
+announcement:
+  item: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>has purchased</white> <aqua>{service}</aqua><white>! Thank you for supporting the server!</white>"
+  key: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>has obtained a</white> <light_purple>{service}</light_purple><white>! Thank you for your support!</white>"
+  tool: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>has acquired the</white> <gold>{service}</gold><white>! We appreciate your support!</white>"
+  subscription: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>has subscribed to</white> <yellow>{service}</yellow><white>! Thank you for supporting Mysterria!</white>"
+  permission: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>has unlocked</white> <aqua>{service}</aqua><white>! Thank you for your support!</white>"
+  discord_role: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>has received the</white> <blue>{service}</blue> <white>Discord role! Thank you for supporting the community!</white>"
+
+delivery:
+  success: "<gray>[<gold>Mysterria</gold>]</gray> <green>Your purchase has been delivered successfully!</green>"
+  queued: "<gray>[<gold>Mysterria</gold>]</gray> <yellow>You have pending deliveries that will be processed shortly.</yellow>"
+  failed: "<gray>[<gold>Mysterria</gold>]</gray> <red>Failed to deliver your purchase. Please contact an administrator.</red>"

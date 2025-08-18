@@ -1,0 +1,17 @@
+name: MysterriaDelivery
+version: '${version}'
+main: net.mysterria.delivery.MysterriaDelivery
+api-version: '1.21'
+authors: [ Mysterria ]
+description: "Automated delivery system for Mysterria purchases"
+website: "https://mysterria.net"
+depend: [ CatWalk, LuckPerms ]
+commands:
+  delivery:
+    description: "MysterriaDelivery management commands"
+    usage: "/delivery reload"
+    permission: mysterria.delivery.admin
+permissions:
+  mysterria.delivery.admin:
+    description: "Permission to manage MysterriaDelivery"
+    default: op

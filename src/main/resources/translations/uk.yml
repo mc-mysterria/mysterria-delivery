@@ -1,0 +1,12 @@
+announcement:
+  item: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>придбав</white> <aqua>{service}</aqua><white>! Дякуємо за підтримку сервера!</white>"
+  key: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>отримав</white> <light_purple>{service}</light_purple><white>! Дякуємо за вашу підтримку!</white>"
+  tool: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>придбав</white> <gold>{service}</gold><white>! Ми цінуємо вашу підтримку!</white>"
+  subscription: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>оформив підписку</white> <yellow>{service}</yellow><white>! Дякуємо за підтримку Mysterria!</white>"
+  permission: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>розблокував</white> <aqua>{service}</aqua><white>! Дякуємо за вашу підтримку!</white>"
+  discord_role: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>отримав</white> <blue>{service}</blue> <white>роль у Discord! Дякуємо за підтримку спільноти!</white>"
+
+delivery:
+  success: "<gray>[<gold>Mysterria</gold>]</gray> <green>Вашу покупку успішно доставлено!</green>"
+  queued: "<gray>[<gold>Mysterria</gold>]</gray> <yellow>У вас є доставки в очікуванні, які будуть оброблені найближчим часом.</yellow>"
+  failed: "<gray>[<gold>Mysterria</gold>]</gray> <red>Не вдалося доставити вашу покупку. Будь ласка, зверніться до адміністратора.</red>"
