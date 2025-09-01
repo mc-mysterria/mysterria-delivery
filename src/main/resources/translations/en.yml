@@ -5,7 +5,7 @@ announcement:
   subscription: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>has subscribed to</white> <yellow>{service}</yellow><white>! Thank you for supporting Mysterria!</white>"
   permission: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>has unlocked</white> <aqua>{service}</aqua><white>! Thank you for your support!</white>"
   discord_role: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>has received the</white> <blue>{service}</blue> <white>Discord role! Thank you for supporting the community!</white>"
-  vote: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>has voted for </white> <blue>Mysterria</blue> <white> and received {amount} Brilliant Emporium points for that!</white>"
+  vote: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>has voted for </white><blue>Mysterria</blue> <white>and received {amount} Brilliant Emporium points for that!</white>"
 
 delivery:
   success: "<gray>[<gold>Mysterria</gold>]</gray> <green>Your purchase has been delivered successfully!</green>"

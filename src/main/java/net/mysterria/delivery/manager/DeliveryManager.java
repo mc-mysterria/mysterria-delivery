@@ -298,17 +298,30 @@ public class DeliveryManager {
     public void processQueuedDelivery(QueuedDelivery queued) {
         Player player = Bukkit.getPlayer(queued.getPlayerUuid());
         if (player != null && player.isOnline()) {
-            deliverItem(player, queued.getPurchaseRequest()).thenAccept(response -> {
-                if (response.isSuccess()) {
-                    queueManager.removeFromQueue(queued.getPurchaseId());
-                } else {
-                    queued.setRetryCount(queued.getRetryCount() + 1);
-                    if (queued.getRetryCount() >= config.getMaxRetries()) {
-                        plugin.getLogger().severe("Failed to deliver purchase after " + config.getMaxRetries() + " retries: " + queued.getPurchaseId());
+            if (queued.getPurchaseRequest() != null) {
+                deliverItem(player, queued.getPurchaseRequest()).thenAccept(response -> {
+                    if (response.isSuccess()) {
                         queueManager.removeFromQueue(queued.getPurchaseId());
+                    } else {
+                        queued.setRetryCount(queued.getRetryCount() + 1);
+                        if (queued.getRetryCount() >= config.getMaxRetries()) {
+                            plugin.getLogger().severe("Failed to deliver purchase after " + config.getMaxRetries() + " retries: " + queued.getPurchaseId());
+                            queueManager.removeFromQueue(queued.getPurchaseId());
+                        }
                     }
-                }
-            });
+                });
+            } else if (queued.getVoteReward() != null) {
+                deliverVoteReward(player, queued.getVoteReward()).thenAccept(response -> {
+                    if (response.isSuccess()) {
+                        queueManager.removeFromQueue(queued.getPurchaseId());
+                    } else {
+                        queued.setRetryCount(queued.getRetryCount() + 1);
+                        if (queued.getRetryCount() >= config.getMaxRetries()) {
+                            plugin.getLogger().severe("Failed to deliver vote reward after " + config.getMaxRetries() + " retries: " + queued.getPurchaseId());
+                        }
+                    }
+                });
+            }
         }
     }
 
