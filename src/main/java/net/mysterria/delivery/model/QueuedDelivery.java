@@ -13,10 +13,30 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QueuedDelivery {
+
     private String purchaseId;
     private UUID playerUuid;
     private String playerName;
     private PurchaseRequest purchaseRequest;
+    private VoteReward voteReward;
     private LocalDateTime queuedAt;
     private int retryCount;
+
+    public QueuedDelivery(String purchaseId, UUID playerUuid, String playerName, LocalDateTime queuedAt, int retryCount, PurchaseRequest purchaseRequest) {
+        this.purchaseId = purchaseId;
+        this.playerUuid = playerUuid;
+        this.playerName = playerName;
+        this.queuedAt = queuedAt;
+        this.retryCount = retryCount;
+        this.purchaseRequest = purchaseRequest;
+    }
+
+    public QueuedDelivery(String purchaseId, UUID playerUuid, String playerName, LocalDateTime queuedAt, int retryCount, VoteReward voteReward) {
+        this.purchaseId = purchaseId;
+        this.playerUuid = playerUuid;
+        this.playerName = playerName;
+        this.queuedAt = queuedAt;
+        this.retryCount = retryCount;
+        this.voteReward = voteReward;
+    }
 }

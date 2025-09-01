@@ -6,5 +6,6 @@ public enum ServiceType {
     TOOL,
     SUBSCRIPTION,
     PERMISSION,
-    DISCORD_ROLE
+    DISCORD_ROLE,
+    VOTE_REWARD
 }

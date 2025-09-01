@@ -11,22 +11,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeliveryResponse {
-    
+
     @JsonProperty("success")
     private boolean success;
-    
+
     @JsonProperty("message")
     private String message;
-    
+
     @JsonProperty("purchaseId")
     private String purchaseId;
-    
+
     @JsonProperty("queued")
     private Boolean queued;
-    
+
     @JsonProperty("deliveredAt")
     private String deliveredAt;
-    
+
     public static DeliveryResponse success(String purchaseId, String message) {
         return DeliveryResponse.builder()
                 .success(true)
@@ -35,7 +35,7 @@ public class DeliveryResponse {
                 .deliveredAt(java.time.LocalDateTime.now().toString())
                 .build();
     }
-    
+
     public static DeliveryResponse queued(String purchaseId, String message) {
         return DeliveryResponse.builder()
                 .success(true)
@@ -44,7 +44,7 @@ public class DeliveryResponse {
                 .queued(true)
                 .build();
     }
-    
+
     public static DeliveryResponse error(String purchaseId, String message) {
         return DeliveryResponse.builder()
                 .success(false)

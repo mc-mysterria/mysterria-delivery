@@ -5,6 +5,7 @@ announcement:
   subscription: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>оформив підписку</white> <yellow>{service}</yellow><white>! Дякуємо за підтримку Mysterria!</white>"
   permission: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>розблокував</white> <aqua>{service}</aqua><white>! Дякуємо за вашу підтримку!</white>"
   discord_role: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>отримав</white> <blue>{service}</blue> <white>роль у Discord! Дякуємо за підтримку спільноти!</white>"
+  vote: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>проголосував за</white> <blue>Mysterria</blue> <white> і отримав {amount} очок Блиского Емпоріуму за це!</white>"
 
 delivery:
   success: "<gray>[<gold>Mysterria</gold>]</gray> <green>Вашу покупку успішно доставлено!</green>"

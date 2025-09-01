@@ -23,43 +23,43 @@ import java.util.Map;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PurchaseRequest {
-    
+
     @JsonProperty("purchaseId")
     private String purchaseId;
-    
+
     @JsonProperty("userId")
     private String userId;
-    
+
     @JsonProperty("minecraftUuid")
     private String minecraftUuid;
-    
+
     @JsonProperty("nickname")
     private String nickname;
-    
+
     @JsonProperty("serviceId")
     private Integer serviceId;
-    
+
     @JsonProperty("serviceName")
     private String serviceName;
-    
+
     @JsonProperty("serviceType")
     private ServiceType serviceType;
-    
+
     @JsonProperty("metadata")
     private Map<String, Object> metadata;
-    
+
     @JsonProperty("expiresAt")
     @JsonDeserialize(using = LocalDateTimeArrayDeserializer.class)
     private String expiresAt;
-    
+
     @JsonProperty("quantity")
     private Integer quantity = 1;
-    
+
     public static class LocalDateTimeArrayDeserializer extends JsonDeserializer<String> {
         @Override
         public String deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
             JsonNode node = p.getCodec().readTree(p);
-            
+
             if (node.isTextual()) {
                 return node.asText();
             } else if (node.isArray() && node.size() >= 6) {
@@ -70,7 +70,7 @@ public class PurchaseRequest {
                 int minute = node.get(4).asInt();
                 int second = node.get(5).asInt();
                 int nano = node.size() > 6 ? node.get(6).asInt() : 0;
-                
+
                 LocalDateTime dateTime = LocalDateTime.of(year, month, day, hour, minute, second, nano);
                 return dateTime.toString();
             } else {

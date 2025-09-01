@@ -7,41 +7,40 @@ import io.javalin.http.HttpStatus;
 import io.javalin.openapi.*;
 import net.mysterria.delivery.manager.DeliveryManager;
 import net.mysterria.delivery.model.DeliveryResponse;
-import net.mysterria.delivery.model.PurchaseRequest;
-import net.mysterria.delivery.model.source.ServiceType;
+import net.mysterria.delivery.model.VoteReward;
 
 import java.util.concurrent.CompletableFuture;
 
-public class PermissionDeliveryEndpoint {
+public class VoteRewardDeliveryEndpoint {
 
     private final DeliveryManager deliveryManager;
 
-    public PermissionDeliveryEndpoint(DeliveryManager deliveryManager) {
+    public VoteRewardDeliveryEndpoint(DeliveryManager deliveryManager) {
         this.deliveryManager = deliveryManager;
     }
 
     @OpenApi(
-            path = "/delivery/permission",
+            path = "/delivery/vote",
             methods = HttpMethod.POST,
-            summary = "Deliver permission purchase",
-            description = "Processes permission purchases and grants LuckPerms permissions",
+            summary = "Deliver vote reward purchase",
+            description = "Processes votes and delivers rewards to the player",
             tags = {"Delivery"},
             requestBody = @OpenApiRequestBody(
-                    content = @OpenApiContent(from = PurchaseRequest.class),
+                    content = @OpenApiContent(from = VoteReward.class),
                     required = true
             ),
             responses = {
-                    @OpenApiResponse(status = "200", description = "Permission granted",
+                    @OpenApiResponse(status = "200", description = "Delivery processed",
                             content = @OpenApiContent(from = DeliveryResponse.class)),
                     @OpenApiResponse(status = "400", description = "Invalid request"),
                     @OpenApiResponse(status = "500", description = "Internal server error")
             }
     )
-    @BridgeEventHandler(requiresAuth = true, description = "Deliver permission", logRequests = true)
-    public CompletableFuture<BridgeApiResponse<DeliveryResponse>> deliverPermission(@BridgeRequestBody PurchaseRequest request) {
-        if (request.getServiceType() != ServiceType.PERMISSION) {
+    @BridgeEventHandler(requiresAuth = true, description = "Deliver item purchase", logRequests = true)
+    public CompletableFuture<BridgeApiResponse<DeliveryResponse>> deliverItem(@BridgeRequestBody VoteReward request) {
+        if (request.getCommand() == null) {
             return CompletableFuture.completedFuture(
-                    BridgeApiResponse.error("Invalid service type for permission delivery", HttpStatus.BAD_REQUEST)
+                    BridgeApiResponse.error("Invalid service type for item delivery", HttpStatus.BAD_REQUEST)
             );
         }
 
