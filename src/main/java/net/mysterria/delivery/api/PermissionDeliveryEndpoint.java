@@ -8,7 +8,6 @@ import io.javalin.openapi.*;
 import net.mysterria.delivery.manager.DeliveryManager;
 import net.mysterria.delivery.model.DeliveryResponse;
 import net.mysterria.delivery.model.PurchaseRequest;
-import net.mysterria.delivery.model.source.ServiceType;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -39,13 +38,7 @@ public class PermissionDeliveryEndpoint {
     )
     @BridgeEventHandler(requiresAuth = true, description = "Deliver permission", logRequests = true)
     public CompletableFuture<BridgeApiResponse<DeliveryResponse>> deliverPermission(@BridgeRequestBody PurchaseRequest request) {
-        if (request.getServiceType() != ServiceType.PERMISSION) {
-            return CompletableFuture.completedFuture(
-                    BridgeApiResponse.error("Invalid service type for permission delivery", HttpStatus.BAD_REQUEST)
-            );
-        }
-
-        return deliveryManager.processPurchase(request)
+        return deliveryManager.processPermissionDelivery(request)
                 .thenApply(BridgeApiResponse::success)
                 .exceptionally(e -> BridgeApiResponse.error(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
     }

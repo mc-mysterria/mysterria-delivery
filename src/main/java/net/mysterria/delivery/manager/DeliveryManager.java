@@ -24,10 +24,10 @@ import java.util.logging.Level;
 public class DeliveryManager {
 
     private final MysterriaDelivery plugin;
-    private DeliveryConfig config;
     private final QueueManager queueManager;
     private final Set<String> processedPurchases = new HashSet<>();
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
+    private DeliveryConfig config;
 
     public DeliveryManager(MysterriaDelivery plugin, DeliveryConfig config, QueueManager queueManager) {
         this.plugin = plugin;
@@ -53,7 +53,11 @@ public class DeliveryManager {
         return deliverVoteReward(player, request);
     }
 
-    public CompletableFuture<DeliveryResponse> processPurchase(PurchaseRequest request) {
+    /**
+     * Process item delivery (items, keys, tools)
+     * Requires player to be online, queues if offline
+     */
+    public CompletableFuture<DeliveryResponse> processItemDelivery(PurchaseRequest request) {
         if (processedPurchases.contains(request.getPurchaseId())) {
             return CompletableFuture.completedFuture(
                     DeliveryResponse.success(request.getPurchaseId(), "Purchase already processed")
@@ -63,31 +67,42 @@ public class DeliveryManager {
         UUID playerUuid = UUID.fromString(request.getMinecraftUuid());
         Player player = Bukkit.getPlayer(playerUuid);
 
-        switch (request.getServiceType()) {
-            case ITEM, KEY, TOOL, VOTE_REWARD -> {
-                if (player == null || !player.isOnline()) {
-                    queueManager.queueDelivery(request);
-                    return CompletableFuture.completedFuture(
-                            DeliveryResponse.queued(request.getPurchaseId(), "Player offline, delivery queued")
-                    );
-                }
-                return deliverItem(player, request);
-            }
-            case SUBSCRIPTION -> {
-                return deliverSubscription(playerUuid, request);
-            }
-            case PERMISSION -> {
-                return deliverPermission(playerUuid, request);
-            }
-            case DISCORD_ROLE -> {
-                return deliverDiscordRole(request);
-            }
-            default -> {
-                return CompletableFuture.completedFuture(
-                        DeliveryResponse.error(request.getPurchaseId(), "Unknown service type: " + request.getServiceType())
-                );
-            }
+        if (player == null || !player.isOnline()) {
+            queueManager.queueDelivery(request);
+            return CompletableFuture.completedFuture(
+                    DeliveryResponse.queued(request.getPurchaseId(), "Player offline, delivery queued")
+            );
         }
+
+        return deliverItem(player, request);
+    }
+
+    /**
+     * Process subscription delivery (LuckPerms groups)
+     */
+    public CompletableFuture<DeliveryResponse> processSubscriptionDelivery(PurchaseRequest request) {
+        if (processedPurchases.contains(request.getPurchaseId())) {
+            return CompletableFuture.completedFuture(
+                    DeliveryResponse.success(request.getPurchaseId(), "Purchase already processed")
+            );
+        }
+
+        UUID playerUuid = UUID.fromString(request.getMinecraftUuid());
+        return deliverSubscription(playerUuid, request);
+    }
+
+    /**
+     * Process permission delivery (LuckPerms permissions)
+     */
+    public CompletableFuture<DeliveryResponse> processPermissionDelivery(PurchaseRequest request) {
+        if (processedPurchases.contains(request.getPurchaseId())) {
+            return CompletableFuture.completedFuture(
+                    DeliveryResponse.success(request.getPurchaseId(), "Purchase already processed")
+            );
+        }
+
+        UUID playerUuid = UUID.fromString(request.getMinecraftUuid());
+        return deliverPermission(playerUuid, request);
     }
 
     private CompletableFuture<DeliveryResponse> deliverVoteReward(Player player, VoteReward request) {
@@ -280,7 +295,11 @@ public class DeliveryManager {
             Locale locale = player.locale();
             String langCode = locale.getLanguage().equals("uk") ? "uk" : "en";
 
-            String messageKey = "announcement." + request.getServiceType().name().toLowerCase();
+            String deliveryType = request.getServiceCategory() != null
+                    ? request.getServiceCategory().toLowerCase()
+                    : "item";
+
+            String messageKey = "announcement." + deliveryType;
             String message = tm.getMessage(langCode, messageKey)
                     .replace("{player}", purchaser.getName())
                     .replace("{service}", request.getServiceName());

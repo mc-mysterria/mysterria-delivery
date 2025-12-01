@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.mysterria.delivery.model.source.ServiceType;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -42,8 +41,8 @@ public class PurchaseRequest {
     @JsonProperty("serviceName")
     private String serviceName;
 
-    @JsonProperty("serviceType")
-    private ServiceType serviceType;
+    @JsonProperty("serviceCategory")
+    private String serviceCategory;
 
     @JsonProperty("metadata")
     private Map<String, Object> metadata;

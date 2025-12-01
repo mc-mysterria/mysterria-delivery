@@ -9,7 +9,6 @@ import io.javalin.openapi.*;
 import net.mysterria.delivery.manager.DeliveryManager;
 import net.mysterria.delivery.model.DeliveryResponse;
 import net.mysterria.delivery.model.PurchaseRequest;
-import net.mysterria.delivery.model.source.ServiceType;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -40,16 +39,7 @@ public class ItemDeliveryEndpoint {
     )
     @BridgeEventHandler(requiresAuth = true, description = "Deliver item purchase", logRequests = true)
     public CompletableFuture<BridgeApiResponse<DeliveryResponse>> deliverItem(@BridgeRequestBody PurchaseRequest request) {
-        if (request.getServiceType() != ServiceType.ITEM &&
-            request.getServiceType() != ServiceType.KEY &&
-            request.getServiceType() != ServiceType.TOOL &&
-            request.getServiceType() != ServiceType.VOTE_REWARD) {
-            return CompletableFuture.completedFuture(
-                    BridgeApiResponse.error("Invalid service type for item delivery", HttpStatus.BAD_REQUEST)
-            );
-        }
-
-        return deliveryManager.processPurchase(request)
+        return deliveryManager.processItemDelivery(request)
                 .thenApply(BridgeApiResponse::success)
                 .exceptionally(e -> BridgeApiResponse.error(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
     }

@@ -59,7 +59,6 @@ public class MysterriaDelivery extends JavaPlugin {
         webserverService.registerHandlers(new ItemDeliveryEndpoint(deliveryManager));
         webserverService.registerHandlers(new SubscriptionDeliveryEndpoint(deliveryManager));
         webserverService.registerHandlers(new PermissionDeliveryEndpoint(deliveryManager));
-        webserverService.registerHandlers(new DiscordRoleDeliveryEndpoint(deliveryManager));
         webserverService.registerHandlers(new VoteRewardDeliveryEndpoint(deliveryManager));
 
         queueManager.loadQueue();
