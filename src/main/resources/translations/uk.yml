@@ -1,10 +1,13 @@
 announcement:
-  item: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>придбав</white> <aqua>{service}</aqua><white>! Дякуємо за підтримку сервера!</white>"
-  key: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>отримав</white> <light_purple>{service}</light_purple><white>! Дякуємо за вашу підтримку!</white>"
-  tool: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>придбав</white> <gold>{service}</gold><white>! Ми цінуємо вашу підтримку!</white>"
-  subscription: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>оформив підписку</white> <yellow>{service}</yellow><white>! Дякуємо за підтримку Mysterria!</white>"
-  permission: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>розблокував</white> <aqua>{service}</aqua><white>! Дякуємо за вашу підтримку!</white>"
-  discord_role: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>отримав</white> <blue>{service}</blue> <white>роль у Discord! Дякуємо за підтримку спільноти!</white>"
+  items: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>придбав</white> <aqua>{service}</aqua><white>! Дякуємо за підтримку сервера!</white>"
+  subscriptions: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>оформив підписку</white> <yellow>{service}</yellow><white>! Дякуємо за підтримку Mysterria!</white>"
+  permissions: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>розблокував</white> <aqua>{service}</aqua><white>! Дякуємо за вашу підтримку!</white>"
+  discord_roles: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>отримав</white> <blue>{service}</blue> <white>роль у Discord! Дякуємо за підтримку спільноти!</white>"
+  dungeon_keys: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>отримав</white> <light_purple>{service}</light_purple><white>! Дякуємо за вашу підтримку!</white>"
+  battlepass: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>придбав</white> <gold>{service}</gold><white>! Ми цінуємо вашу підтримку!</white>"
+  cosmetics: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>розблокував</white> <light_purple>{service}</light_purple><white>! Дякуємо за підтримку сервера!</white>"
+  other: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>придбав</white> <white>{service}</white><white>! Дякуємо за вашу підтримку!</white>"
+  fallback: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>підтримав сервер, купивши</white> <aqua>{service}</aqua><white>. Дякуємо!</white>"
   vote: "<gray>[<gold>Mysterria</gold>]</gray> <green>{player}</green> <white>проголосував за</white> <blue>Mysterria</blue><white> і отримав {amount} очок Блискучого Емпоріуму за це!</white>"
 
 delivery:

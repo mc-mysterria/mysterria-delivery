@@ -284,6 +284,24 @@ public class DeliveryManager {
         }
     }
 
+    private String mapCategoryToTranslationKey(String category) {
+        if (category == null) {
+            return "items";
+        }
+
+        return switch (category.toLowerCase()) {
+            case "items" -> "items";
+            case "subscriptions" -> "subscriptions";
+            case "permissions" -> "permissions";
+            case "discord roles" -> "discord_roles";
+            case "dungeon keys" -> "dungeon_keys";
+            case "battlepass" -> "battlepass";
+            case "cosmetics" -> "cosmetics";
+            case "other" -> "other";
+            default -> "fallback";
+        };
+    }
+
     private void announceDelivery(Player purchaser, PurchaseRequest request) {
         if (!config.isAnnouncementsEnabled()) {
             return;
@@ -295,10 +313,7 @@ public class DeliveryManager {
             Locale locale = player.locale();
             String langCode = locale.getLanguage().equals("uk") ? "uk" : "en";
 
-            String deliveryType = request.getServiceCategory() != null
-                    ? request.getServiceCategory().toLowerCase()
-                    : "item";
-
+            String deliveryType = mapCategoryToTranslationKey(request.getServiceCategory());
             String messageKey = "announcement." + deliveryType;
             String message = tm.getMessage(langCode, messageKey)
                     .replace("{player}", purchaser.getName())
